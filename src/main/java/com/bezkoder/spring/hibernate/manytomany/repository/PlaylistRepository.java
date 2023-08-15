@@ -8,4 +8,6 @@ import java.util.List;
 public interface PlaylistRepository extends JpaRepository<Playlist, Long> {
 //  @Query(value = "select * from tutorials where title like %:title% ", nativeQuery = true)
   List<Playlist> findByTitleContaining(String title);
+  List<Playlist> findPlaylistsByUserId(long id);
+  Playlist findPlaylistById(long id);
 }

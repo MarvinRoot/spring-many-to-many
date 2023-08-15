@@ -34,6 +34,11 @@ public class User {
             @JoinColumn(name = "song_id") })
     private Set<Song> favoriteSongs = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(name = "favorite_genres", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
+            @JoinColumn(name = "genre_id") })
+    private Set<Genre> favoriteGenres = new HashSet<>();
+
     public User() {
     }
 
@@ -99,6 +104,14 @@ public class User {
 
     public void setFavoriteSongs(Set<Song> favoriteSongs) {
         this.favoriteSongs = favoriteSongs;
+    }
+
+    public Set<Genre> getFavoriteGenres() {
+        return favoriteGenres;
+    }
+
+    public void setFavoriteGenres(Set<Genre> favoriteGenres) {
+        this.favoriteGenres = favoriteGenres;
     }
 
     @Override

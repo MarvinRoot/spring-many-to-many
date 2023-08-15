@@ -8,4 +8,5 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long> {
 //  @Query(value = "select * from tutorials where title like %:title% ", nativeQuery = true)
   List<User> findByUsernameContaining(String username);
+  User findUserById(long id);
 }

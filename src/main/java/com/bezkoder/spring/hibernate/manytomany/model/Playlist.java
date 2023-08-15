@@ -1,6 +1,9 @@
 package com.bezkoder.spring.hibernate.manytomany.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +23,11 @@ public class Playlist {
             @JoinColumn(name = "song_id") })
     private Set<Song> songs = new HashSet<>();
 
-
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private User user;
 
     public Playlist() {
 

@@ -16,4 +16,14 @@ public class ArtistServiceImpl implements ArtistService{
     public List<Artist> getAllArtists() {
         return artistRepository.findAll();
     }
+
+    @Override
+    public List<Artist> getArtistsByGenreId(long id) {
+        return artistRepository.findArtistsByGenreId(id);
+    }
+
+    @Override
+    public Artist getArtistById(long id) {
+        return artistRepository.findArtistById(id);
+    }
 }

@@ -5,6 +5,9 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 @Table(name = "artist")
 public class Artist {
@@ -34,7 +37,14 @@ public class Artist {
     @JsonIgnore
     private Set<Song> songs = new HashSet<>();
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(nullable = false, name = "genre_id")
+    @OnDelete(action = OnDeleteAction.RESTRICT)
+    @JsonIgnore
+    private Genre genre;
 
+//    @Transient
+//    private long genreId;
 
     public Artist() {
 
@@ -79,6 +89,22 @@ public class Artist {
     public void setSongs(Set<Song> songs) {
         this.songs = songs;
     }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+//    public long getGenreId() {
+//        return genre.getId();
+//    }
+//
+//    public void setGenreId(long genreId) {
+//        this.genreId = genreId;
+//    }
 
     @Override
     public String toString() {
