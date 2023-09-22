@@ -1,8 +1,6 @@
 package com.bezkoder.spring.hibernate.manytomany.service;
 
-import com.bezkoder.spring.hibernate.manytomany.model.Artist;
 import com.bezkoder.spring.hibernate.manytomany.model.Comment;
-import com.bezkoder.spring.hibernate.manytomany.repository.ArtistRepository;
 import com.bezkoder.spring.hibernate.manytomany.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,4 +27,7 @@ public class CommentServiceImpl implements CommentService{
     public List<Comment> getCommentsOfUser(long id) {
         return commentRepository.findCommentsByUserId(id);
     }
+
+    @Override
+    public Comment createComment(Comment comment) { commentRepository.save(comment); return comment; }
 }

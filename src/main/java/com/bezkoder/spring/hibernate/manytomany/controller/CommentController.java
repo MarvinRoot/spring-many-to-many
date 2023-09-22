@@ -1,11 +1,7 @@
 package com.bezkoder.spring.hibernate.manytomany.controller;
 
 import com.bezkoder.spring.hibernate.manytomany.model.Comment;
-import com.bezkoder.spring.hibernate.manytomany.model.Genre;
-import com.bezkoder.spring.hibernate.manytomany.model.Song;
 import com.bezkoder.spring.hibernate.manytomany.service.CommentService;
-import com.bezkoder.spring.hibernate.manytomany.service.GenreService;
-import com.bezkoder.spring.hibernate.manytomany.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,5 +28,11 @@ public class CommentController {
         }
 
         return new ResponseEntity<>(comments, HttpStatus.OK);
+    }
+
+    @PostMapping("/comments")
+    public ResponseEntity<Comment> createComment(@RequestBody Comment comment) {
+        Comment _comment = commentService.createComment(new Comment(comment.getContent(), comment.getSong(), comment.getUser()));
+        return new ResponseEntity<>(_comment, HttpStatus.CREATED);
     }
 }

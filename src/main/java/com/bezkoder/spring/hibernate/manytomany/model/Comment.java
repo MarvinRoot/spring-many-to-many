@@ -2,13 +2,9 @@ package com.bezkoder.spring.hibernate.manytomany.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "comment")
@@ -33,6 +29,11 @@ public class Comment {
 //    @JsonIgnore
     private User user;
 
+    public Comment(String content, Song song, User user) {
+        this.content = content;
+        this.song = song;
+        this.user = user;
+    }
 
     public Comment() {
     }
